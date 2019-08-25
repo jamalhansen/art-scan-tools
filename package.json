@@ -1,0 +1,12 @@
+{
+  "name": "art-scan-tools",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Jamal Hansen <jamal.hansen@gmail.com> (https://codingtruck.com)",
+  "license": "MIT"
+}

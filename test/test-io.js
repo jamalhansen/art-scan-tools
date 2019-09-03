@@ -30,18 +30,23 @@ describe('IO', () => {
     });
   });
 
-  describe('.extension', () => {
-    it('should accept a filename and return the extension', () => {
-      const ext = io.extension("foo.jpg")
-      ext.should.equal("jpg")
+  describe('.expand', () => {
+    it('should accept a filename and return the name and extension', () => {
+      const ext = io.expand("foo.jpg")
+      ext.extension.should.equal("jpg")
+      ext.name.should.equal("foo")
     });
 
-    it('should throw an error if filename does not have an extension', () => {
-      expect(() => io.extension("extensionless")).to.throw(Error)
+    it('should return a undefined extension when there is none', () => {
+      const ext = io.expand("extensionless")
+      ext.name.should.equal("extensionless")
+      expect(ext.extension).to.be.undefined
     });
 
-    it('should throw an error if passed undefined', () => {
-      expect(() => io.extension(undefined)).to.throw(Error)
+    it('should parse multiple dotted files correctly', () => {
+      const ext = io.expand("so.many.dots.jpg")
+      ext.extension.should.equal("jpg")
+      ext.name.should.equal("so.many.dots")
     });
   });
 });

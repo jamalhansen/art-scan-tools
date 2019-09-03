@@ -78,7 +78,6 @@ describe('Information', () => {
       const values = () => {return {name: "foo"}}
       const defaults = () =>  {return {name: "", thing: "what"}}
       const result = information.merge(values, defaults)
-      console.log(result)
       result.name.should.equal("foo")
       result.thing.should.equal("what")
     })

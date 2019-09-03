@@ -15,8 +15,8 @@ describe('IO', () => {
     });
 
     it('should return an empty array for an empty path', async () => {
-      const singleFilePath = path.join(__dirname, "resources", "empty")
-      const files =  await io.listFiles(singleFilePath)
+      const emptyPath = path.join(__dirname, "resources", "empty")
+      const files =  await io.listFiles(emptyPath)
       files.length.should.equal(0)
     });
 
@@ -35,6 +35,11 @@ describe('IO', () => {
       const ext = io.expand("foo.jpg")
       ext.extension.should.equal("jpg")
       ext.name.should.equal("foo")
+    });
+
+    it('should return the original filename', () => {
+      const ext = io.expand("foo.jpg")
+      ext.filename.should.equal("foo.jpg")
     });
 
     it('should return a undefined extension when there is none', () => {

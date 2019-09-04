@@ -15,22 +15,20 @@ describe('Image', () => {
 
   describe('.inbox', () => {
     it('should return nothing when passed no files', () => {
-      const getFiles = () => []
-      const result = image.inbox(getFiles)
+      const result = image.inbox([])
       result.length.should.equal(0)
       result.should.be.empty
     })
 
     it('should contain extension and name separately', () => {
-      const getFiles = () => ["foo.jpg"]
-      const result = image.inbox(getFiles)[0]
+      const result = image.inbox(["foo.jpg"])[0]
       result.name.should.equal("foo")
       result.extension.should.equal("jpg")
     })
 
     it('should filter out non-image files', () => {
-      const getFiles = () => ["foo.bar", "extensionless", "pure.gold"]
-      const result = image.inbox(getFiles)
+      const files = ["foo.bar", "extensionless", "pure.gold"]
+      const result = image.inbox(files)
       result.length.should.equal(0)
     })
   })

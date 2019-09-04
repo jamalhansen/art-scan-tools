@@ -9,6 +9,7 @@ describe('Information', () => {
       const result = information.getTemplate()
       result.name.should.equal("")
       result.date.should.equal("")
+      result.imagefile.should.equal("")
       result.title.should.equal("")
       result.scanned.should.equal("")
       result.category.should.equal("")
@@ -25,8 +26,9 @@ describe('Information', () => {
 
   describe('.getInfo', () => {
     it('gets template filled with basic info for the file', () => {
-      const result = information.getInfo("20191225-christmas-time")
+      const result = information.getInfo({name: "20191225-christmas-time", filename:"20191225-christmas-time.jpg"})
       result.name.should.equal("christmas-time")
+      result.imagefile.should.equal("20191225-christmas-time.jpg")
       result.date.should.eql(new Date(2019, 11, 25))
       result.title.should.equal("Christmas Time")
       result.scanned.should.eql(new Date(new Date().getFullYear(),new Date().getMonth() , new Date().getDate()))
@@ -47,8 +49,9 @@ describe('Information', () => {
 
   describe('.infer', () => {
     it('will determine basic information from the filename', () => {
-      const result = information.infer("20190203-coding-truck")
+      const result = information.infer({name: "20190203-coding-truck", filename:"20190203-coding-truck.jpg"})
       result.name.should.equal("coding-truck")
+      result.imagefile.should.equal("20190203-coding-truck.jpg")
       result.date.should.eql(new Date(2019, 1, 3))
       result.title.should.equal("Coding Truck")
       result.scanned.should.eql(new Date(new Date().getFullYear(),new Date().getMonth() , new Date().getDate()))

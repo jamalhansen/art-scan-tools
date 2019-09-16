@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "run": "node -e 'require(`./index`).runnit()'"
+    "go": "node -e 'require(`./index`).go()'"
   },
   "keywords": [],
   "author": "Jamal Hansen <jamal.hansen@gmail.com> (https://codingtruck.com)",
@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "bluebird": "^3.5.5",
-    "js-yaml": "^3.13.1"
+    "js-yaml": "^3.13.1",
+    "sharp": "^0.23.0"
   }
 }

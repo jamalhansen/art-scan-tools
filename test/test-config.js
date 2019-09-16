@@ -11,7 +11,7 @@ describe('Config', () => {
   })
 
   it('adds home directory paths', () => {
-    const result = config.add_home("foo/bar")
+    const result = config.addHome("foo/bar")
     result.should.contain("foo/bar")
   })
 })

@@ -17,25 +17,49 @@ const loadConfiguration = () => {
     return config.load(getConfiguration)
 }
 
-const generateInfo = config_data => {
-    const inbox_path = config.add_home(config_data.inbox)
+const generateInboxList = (inbox_path, config_data) => {
     console.log(`Gathering images from inbox: "${inbox_path}"`)
     return io.listFiles(inbox_path).then(image.inbox)
 }
 
+const generateTargetList = (target_path, config_data) => {
+    console.log(`Gathering images from inbox: "${target_path}"`)
+    return io.listFiles(target_path).then(image.inbox)
+}
+
 const runnit = async () => {
     const config_data = loadConfiguration()
-    const info = await generateInfo(config_data)
-    const home = config.home()
-    const infos = info.map(x => {
-        const name = path.join(home, config_data.target, `${x.name}.yml`)
-        const yml = yaml.dump(information.getInfo(x))
+    const inbox_path = config.add_home(config_data.inbox)
+    const target_path = config.add_home(config_data.target)
+
+    const image_list = await generateInboxList(inbox_path, config_data)
+    const target_list = await generateTargetList(target_path, config_data)
+
+    const target_files = target_list.map(x => x.filename)
+    const filtered_list = image_list.filter( x => !(target_files.includes(x.filename)))
+
+    const image_data = generate_templates(target_path, filtered_list)
+    write_yaml(image_data)
+}
+
+const generate_templates = (target_path, image_list) => {
+    const template_maker = generate_template(target_path)
+    return image_list.map(template_maker)
+}
+
+const generate_template = (target_path) => {
+    return (image_list) => {
+        const name = path.join(target_path, `${image_list.name}.yml`)
+        const yml = yaml.dump(information.getInfo(image_list))
         return {name: name, yaml: yml}
-    })
-    infos.forEach(info => {
-        io.write(info.name, info.yaml)
-        console.log(`Generating yaml for: "${info.name}"`)
+    }
+}
+
+const write_yaml = image_data => {
+    image_data.forEach(image => {
+        io.write(image.name, image.yaml)
+        console.log(`Generating yaml for: "${image.name}"`)
     });
 }
 
-module.exports = {generateInfo, runnit}
+module.exports = {runnit}

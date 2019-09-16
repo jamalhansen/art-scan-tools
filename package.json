@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "go": "node -e 'require(`./index`).go()'"
+    "go": "node -e 'require(`./index`).go()'",
+    "cov": "coverage report"
   },
   "keywords": [],
   "author": "Jamal Hansen <jamal.hansen@gmail.com> (https://codingtruck.com)",

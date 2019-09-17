@@ -4,15 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
-    "go": "node -e 'require(`./index`).go()'",
-    "cov": "coverage report"
+    "test": "nyc mocha",
+    "go": "node -e 'require(`./index`).go()'"
   },
   "keywords": [],
   "author": "Jamal Hansen <jamal.hansen@gmail.com> (https://codingtruck.com)",
   "license": "MIT",
   "devDependencies": {
     "chai": "^4.2.0",
+    "istanbul": "^0.4.5",
     "mocha": "^6.2.0"
   },
   "dependencies": {

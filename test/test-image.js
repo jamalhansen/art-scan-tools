@@ -3,6 +3,7 @@
 const should = require('chai').should();
 const expect = require('chai').expect;
 const image = require("../lib/image.js")
+const path = require("path")
 
 describe('Image', () => {
   describe('.imageExtensions', () => {
@@ -31,5 +32,23 @@ describe('Image', () => {
       const result = image.inbox(files)
       result.length.should.equal(0)
     })
+  })
+
+  describe('.orientation', async () => { 
+    it('return landscape when height < width', async () => {
+      const landscape_image = path.join(__dirname, "resources", "img", "landscape.png")
+      console.log(`landscape image: ${landscape_image}`)
+      const image_name = { source: landscape_image }
+      const result = await image.orientation(image_name)
+      result.should.equal("landscape")
+    })     
+
+    it('return portrait when height > width', async () => {
+      const portrait_image = path.join(__dirname, "resources", "img", "portrait.png")
+      console.log(`portrait image: ${portrait_image}`)
+      const image_name = { source: portrait_image }
+      const result = await image.orientation(image_name)
+      result.should.equal("portrait")
+    })  
   })
 })
